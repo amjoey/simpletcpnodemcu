@@ -41,17 +41,17 @@ public class MainActivity extends AppCompatActivity {
                     String ip = editTextIpAddress.getText().toString();
 
                     // Send message without callback
-                    SimpleTcpClient.send(message, ip, TCP_PORT);
+                    //SimpleTcpClient.send(message, ip, TCP_PORT);
 
                     // Send message and waiting for callback
-//                    SimpleTcpClient.send(message, ip, TCP_PORT, new SimpleTcpClient.SendCallback() {
-//                        public void onSuccess(String tag) {
-//							Toast.makeText(getApplicationContext(), "onSuccess", Toast.LENGTH_SHORT).show();
-//						}
-//						public void onFailed(String tag) {
-//							Toast.makeText(getApplicationContext(), "onFailed", Toast.LENGTH_SHORT).show();
-//						}
-//					}, "TAG");
+                    SimpleTcpClient.send(message+"\r", ip, TCP_PORT, new SimpleTcpClient.SendCallback() {
+                        public void onSuccess(String tag) {
+							Toast.makeText(getApplicationContext(), "onSuccess", Toast.LENGTH_SHORT).show();
+						}
+						public void onFailed(String tag) {
+							Toast.makeText(getApplicationContext(), "onFailed", Toast.LENGTH_SHORT).show();
+						}
+				}, "TAG");
                 }
             }
         });
