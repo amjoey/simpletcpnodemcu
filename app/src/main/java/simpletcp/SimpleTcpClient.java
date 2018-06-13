@@ -52,7 +52,9 @@ public class SimpleTcpClient {
                     final String incomingMessage = bufferedReader.readLine();
                     new Handler(Looper.getMainLooper()).post(new Runnable() {
                         public void run() {
-                            if (incomingMessage.contains("%OK%")) {
+                            if (incomingMessage.contains("%UPDATE%")) {
+                                callback.onUpdated(incomingMessage);
+                            } else if (incomingMessage.contains("%OK%")) {
                                 callback.onSuccess(tag);
                             } else {
                                 callback.onFailed(tag);
@@ -75,6 +77,8 @@ public class SimpleTcpClient {
     }
 
     public interface SendCallback {
+        void onUpdated(String tag);
+
         void onSuccess(String tag);
 
         void onFailed(String tag);
